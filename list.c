@@ -46,10 +46,7 @@ void * firstList(List * list) {
 }
 
 void * nextList(List * list) {
-    if(list->head == NULL || list->current == NULL)
-        return NULL;
-    
-    if(list->current->next == NULL)
+    if(list->head == NULL || list->current == NULL || list->current->next == NULL)
         return NULL;
     
     list->current = list->current->next;
@@ -82,7 +79,6 @@ void pushFront(List * list, void * data) {
 
     if(list->head != NULL)
         list->head->prev = NewNode;
-    
     else
         list->tail = NewNode;
     
@@ -130,11 +126,11 @@ void * popCurrent(List * list) {
     if(Aux->next != NULL){
         Aux->next->prev = Aux->prev;
         list->current = Aux->next;
-    }
-    else {
+    } else {
         list->tail = Aux->prev;
         list->current = NULL;
     }
+    
     free(list->current);
     return Dato;
 }
